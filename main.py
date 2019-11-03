@@ -1,4 +1,4 @@
-from functions import *
+from functions import get_page
 
 url = 'https://www.niu.edu/publicsafety/emergency/safetybulletin/archive.shtml'
 
