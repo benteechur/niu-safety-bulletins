@@ -1,10 +1,8 @@
 import urllib.request
 
-def save_page(x):
+def get_page(x):
 
     url = x
-
-    fName = "savedPage.html"
 
     response = urllib.request.urlopen(url)
 
@@ -12,8 +10,4 @@ def save_page(x):
 
     #print(webContent)
 
-    f = open(fName, 'x', encoding='utf-8')
-    f.write(webContent)
-    f.close()
-
-    return fName
+    return webContent

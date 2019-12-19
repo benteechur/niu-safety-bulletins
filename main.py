@@ -1,9 +1,9 @@
-from functions import save_page
+from functions import get_page
 
 url = 'https://www.niu.edu/publicsafety/emergency/safetybulletin/archive.shtml'
 
-# the entire contents of the page at "url" are now saved in a file named fileName
-fileName = save_page(url)
+# the entire contents of the page at "url" are now contained in the string "webContent"
+webContent = get_page(url)
 
-print(fileName)
+print(webContent)
 
