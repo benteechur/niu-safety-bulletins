@@ -1,4 +1,8 @@
 import urllib.request
+import re
+
+regex1 = r"""<th valign="top" width="14%"><strong>Incident:</strong></th>"""
+incidentPattern = re.compile(regex1)
 
 def save_page(x):
 
@@ -12,8 +16,15 @@ def save_page(x):
 
     #print(webContent)
 
-    f = open(fName, 'x', encoding='utf-8')
-    f.write(webContent)
-    f.close()
+    try:
+        f = open(fName, 'x', encoding='utf-8')
+        f.write(webContent)
+        f.close()
+    except FileExistsError:
+        print()
+        print("File output error: a file named {} already exists. Using existing file.".format(fName))
 
     return fName
+
+def parse_data(line):
+    pass
