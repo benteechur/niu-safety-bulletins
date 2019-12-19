@@ -1,4 +1,4 @@
-# The html file we're working with
+# We're scraping from saved html files to read them line by line instead of as giant strings
 *.html
 
 # Byte-compiled / optimized / DLL files
