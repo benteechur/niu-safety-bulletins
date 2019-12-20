@@ -1,4 +1,4 @@
-from functions import save_page
+from functions import *
 import Bulletin as B
 
 url = 'https://www.niu.edu/publicsafety/emergency/safetybulletin/archive.shtml'
@@ -20,7 +20,6 @@ line_count = 0
 
 for line in file:
     line_count += 1
-
-parse_data(line)
+    parse_data(line)
 
 print(line_count)

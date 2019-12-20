@@ -1,7 +1,8 @@
 import urllib.request
 import re
 
-regex1 = r"""<th valign="top" width="14%"><strong>Incident:</strong></th>"""
+regex1 = r"""<th valign="top" width="86%">"""
+
 incidentPattern = re.compile(regex1)
 
 def save_page(x):
@@ -27,4 +28,6 @@ def save_page(x):
     return fName
 
 def parse_data(line):
-    pass
+    incidentTag = incidentPattern.match(line)
+    if incidentTag:
+        print("found match")
