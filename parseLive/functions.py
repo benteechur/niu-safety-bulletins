@@ -66,6 +66,10 @@ def clean_df(df):
 
     return df_clean
 
+# Function:  the function to test nan values in a column
+# Arguments: takes a df and the number of the column that want to be tested
+# Return:    the count number of nan values in that column
+
 def count_nan(df, col):
     num = df[col].isna().sum()
     return num

@@ -43,18 +43,11 @@ pd.set_option('display.max_columns', 100)
 # Convert the list into df
 df_old = pd.DataFrame(lst_old)
 df_new = pd.DataFrame(lst_new)
-print('The original df for archived notifications is: \n', df_old)
-print()
-print('the count of Nans for columns 10, 11, 12:', fns.count_nan(df_old, 10),
-fns.count_nan(df_old, 11), fns.count_nan(df_old, 12))
-print()
-print('The original df for new notifications is: \n', df_new)
-print()
-print()
 
 # Clean up the DataFrame using "clean_df(df)" function
 df_clean_old = fns.clean_df(df_old)
 df_clean_new = fns.clean_df(df_new)
 
+# Print out the cleaned df
 print('The cleaned df for archived notifications is:\n', df_clean_old)
 print('The cleaned df for new notifications is:\n', df_clean_new)
