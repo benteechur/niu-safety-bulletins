@@ -1,7 +1,11 @@
 import urllib.request
 import re
 
-regex1 = r"""<th valign="top" width="86%">"""
+# groups in regex1 are as follows:
+# group 1: the opening tag for all Incident titles
+# group 2: .*, i.e., 0 or more characters of anything
+# group 3: the closing tag
+regex1 = r"""(<th valign="top" width="86%">)(.*)(</th>)"""
 
 incidentPattern = re.compile(regex1)
 
@@ -28,6 +32,6 @@ def save_page(x):
     return fName
 
 def parse_data(line):
-    incidentTag = incidentPattern.match(line)
+    incidentTag = incidentPattern.search(line)
     if incidentTag:
-        print("found match")
+        print("found match: ", incidentTag.group(2))
