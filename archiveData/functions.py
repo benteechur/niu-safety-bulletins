@@ -38,17 +38,21 @@ def save_page(x):
 
     return fName
 
-def parse_data(line, dateSentinel):
+#def parse_data(line, dateSentinel):
+def parse_data(line, sentinel):
     incidentTag = incidentPattern.search(line)
     if incidentTag:
         print("found match: ", incidentTag.group(2))
     dateTag = datePattern.search(line)
     if dateTag:
-        dateSentinel[0] = True
+        #dateSentinel[0] = True
+        sentinel["date"] = True
         # return immediately from function so that rest of function isn't executed
         return
-    if dateSentinel[0]:
+    #if dateSentinel[0]:
+    if sentinel["date"]:
         dateDataTag = dateDataPattern.search(line)
         if dateDataTag:
             print("found date data: ", dateDataTag.group(2))
-            dateSentinel[0] = False
+            #dateSentinel[0] = False
+            sentinel["date"] = False

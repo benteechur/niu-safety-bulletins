@@ -3,7 +3,8 @@ import Bulletin as B
 
 url = 'https://www.niu.edu/publicsafety/emergency/safetybulletin/archive.shtml'
 # make dateSentinel a list so that the value may be updated (bools are immutable in Python, while lists aren't)
-dateSentinel = [False]
+#dateSentinel = [False]
+sentinel = {"date": False, "location": False, "details": False}
 
 # the entire contents of the page at "url" are now saved in a file named fileName
 fileName = save_page(url)
@@ -22,6 +23,7 @@ line_count = 0
 
 for line in file:
     line_count += 1
-    parse_data(line, dateSentinel)
+    #parse_data(line, dateSentinel)
+    parse_data(line, sentinel)
 
 print(line_count)
