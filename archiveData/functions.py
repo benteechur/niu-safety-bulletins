@@ -1,5 +1,6 @@
 import urllib.request
 import re
+import Bulletin as B
 
 # groups in regex1 are as follows:
 # group 1: the opening tag for all Incident titles
@@ -61,12 +62,13 @@ def save_page(x):
 
     return fName
 
-def parse_data(line, sentinel, detailsCat):
+def parse_data(line, sentinel, detailsCat, tempData, bulletinObjects):
     incidentTag = incidentPattern.search(line)
     if incidentTag:
         # print() to separate output by blank line
         print()
         print("found match: ", incidentTag.group(2))
+        tempData["incident"] = incidentTag.group(2)
 
     dateTag = datePattern.search(line)
     if dateTag:
@@ -77,6 +79,7 @@ def parse_data(line, sentinel, detailsCat):
         dateDataTag = dateDataPattern.search(line)
         if dateDataTag:
             print("found date data: ", dateDataTag.group(2))
+            tempData["date"] = dateDataTag.group(2)
             sentinel["date"] = False
 
     locationTag = locationPattern.search(line)
@@ -100,6 +103,9 @@ def parse_data(line, sentinel, detailsCat):
                 else:
                     newTemp = locationStripTag.group(1)
                 print("strippping tags from location data: ", newTemp)
+                tempData["location"] = newTemp
+            else:
+                tempData["location"] = locationDataTag.group(2)
 
             sentinel["location"] = False
 
@@ -129,6 +135,9 @@ def parse_data(line, sentinel, detailsCat):
 
             print("contents of detailsCat: ", detailsCat[0])
             print("contents of temp: ", temp)
+            tempData["details"] = temp
+            bulletinObjects = bulletinObjects + [B.Bulletin(tempData["incident"], tempData["date"], tempData["location"], tempData["details"])]
+            print("printing bulletinObjects: ", bulletinObjects)
             detailsCat[0] = ""
             sentinel["detailsData"] = False
             sentinel["details"] = False
