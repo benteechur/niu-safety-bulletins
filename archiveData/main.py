@@ -26,7 +26,15 @@ line_count = 0
 
 for line in file:
     line_count += 1
-    parse_data(line, sentinel, detailsCat, tempData, bulletinObjects)
+    # don't pass big list of Bulletin objects to improve performance and because Python can't
+    # alter the list structure itself anyway, just existing values within it
+    tempObject = parse_data(line, sentinel, tempData)
+    if tempObject != None:
+        bulletinObjects = bulletinObjects + [tempObject]
 
 print(line_count)
-print(bulletinObjects)
+# print first object in list
+print("printing bulletinObjects[0]: ", bulletinObjects[0])
+# print last object in list
+print("printing bulletinObjects[-1]: ", bulletinObjects[-1])
+

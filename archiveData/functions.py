@@ -62,7 +62,7 @@ def save_page(x):
 
     return fName
 
-def parse_data(line, sentinel, detailsCat, tempData, bulletinObjects):
+def parse_data(line, sentinel, tempData):
     incidentTag = incidentPattern.search(line)
     if incidentTag:
         # print() to separate output by blank line
@@ -123,24 +123,28 @@ def parse_data(line, sentinel, detailsCat, tempData, bulletinObjects):
             temp = line.lstrip()
             temp = temp.rstrip()
             # 점 marks the end of a line
-            detailsCat[0] += temp + "점"
+            tempData["details"] += temp + "점"
+            #detailsCat[0] += temp + "점"
 
         if detailsCloseTag:
-            temp = detailsCat[0]
+            #temp = detailsCat[0]
+            temp = tempData["details"]
             count = temp.count("<")
             for i in range(count):
                 begin = temp.find("<")
                 end = temp.find (">")
                 temp = temp[:begin] + temp[end+1:]
 
-            print("contents of detailsCat: ", detailsCat[0])
+            #print("contents of detailsCat: ", detailsCat[0])
+            print("contents of tempData['details']: ", tempData["details"])
             print("contents of temp: ", temp)
             tempData["details"] = temp
-            bulletinObjects = bulletinObjects + [B.Bulletin(tempData["incident"], tempData["date"], tempData["location"], tempData["details"])]
-            print("printing bulletinObjects: ", bulletinObjects)
-            detailsCat[0] = ""
+            tempObject = B.Bulletin(tempData["incident"], tempData["date"], tempData["location"], tempData["details"])
+            #detailsCat[0] = ""
+            tempData["details"] = ""
             sentinel["detailsData"] = False
             sentinel["details"] = False
+            return tempObject
 
     """
     # original, more difficult way of removing tags
