@@ -50,6 +50,7 @@ def clean_df(df):
     df[1] = df[1].str.rstrip(' ]')
     df[3] = df[3].str.rstrip(' ]')
     df[5] = df[5].str.rstrip(' ]')
+    df[7] = df[7].str.rstrip(' ]')
     # Split the first column
     df[1] = df[1].str.split(' - ')
     df.reset_index(inplace = True)

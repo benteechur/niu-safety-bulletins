@@ -51,3 +51,10 @@ df_clean_new = fns.clean_df(df_new)
 # Print out the cleaned df
 print('The cleaned df for archived notifications is:\n', df_clean_old)
 print('The cleaned df for new notifications is:\n', df_clean_new)
+
+
+################### Test #############
+# export the two df to csv.
+
+df_clean_new.to_csv(r'D:\1Study\Git\niu-safety-bulletins\Test files\new_notifications.csv', index = False)
+df_clean_old.to_csv(r'D:\1Study\Git\niu-safety-bulletins\Test files\old_notifications.csv', index = False)
