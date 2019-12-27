@@ -29,6 +29,15 @@ stripTagPattern1 = re.compile(regex6)
 regex7 = r"""<.*><.*>(.*)</.*></.*>"""
 stripTagPattern2 = re.compile(regex7)
 
+regex8 = r"""<td valign="top"><strong>Details: </strong></td>"""
+detailsPattern = re.compile(regex8)
+
+regex9 = r"""<td valign="top">"""
+detailsDataOpenPattern = re.compile(regex9)
+
+regex10 = r"""</td>"""
+detailsDataClosePattern = re.compile(regex10)
+
 
 def save_page(x):
 
@@ -52,24 +61,22 @@ def save_page(x):
 
     return fName
 
-#def parse_data(line, dateSentinel):
-def parse_data(line, sentinel):
+def parse_data(line, sentinel, detailsCat):
     incidentTag = incidentPattern.search(line)
     if incidentTag:
+        # print() to separate output by blank line
+        print()
         print("found match: ", incidentTag.group(2))
 
     dateTag = datePattern.search(line)
     if dateTag:
-        #dateSentinel[0] = True
         sentinel["date"] = True
         # return immediately from function so that rest of function isn't executed
         return
-    #if dateSentinel[0]:
     if sentinel["date"]:
         dateDataTag = dateDataPattern.search(line)
         if dateDataTag:
             print("found date data: ", dateDataTag.group(2))
-            #dateSentinel[0] = False
             sentinel["date"] = False
 
     locationTag = locationPattern.search(line)
@@ -80,6 +87,8 @@ def parse_data(line, sentinel):
         locationDataTag = locationDataPattern.search(line)
         if locationDataTag:
             print("found location data: ", locationDataTag.group(2))
+            
+            # this section for cleaning data - consider placing this in another function
             temp = locationDataTag.group(2)
             if "<" in temp:
                 print("extra tags here")
@@ -91,4 +100,37 @@ def parse_data(line, sentinel):
                 else:
                     newTemp = locationStripTag.group(1)
                 print("strippping tags from location data: ", newTemp)
+
             sentinel["location"] = False
+
+    detailsTag = detailsPattern.search(line)
+    if detailsTag:
+        sentinel["details"] = True
+        return
+    if sentinel["details"]:
+        detailsOpenTag = detailsDataOpenPattern.search(line)
+        detailsCloseTag = detailsDataClosePattern.search(line)
+        if detailsOpenTag:
+            sentinel["detailsData"] = True
+        if sentinel["detailsData"]:
+            #print("details sentinel working")
+            detailsStripTag = stripTagPattern1.search(line)
+            detailsStripTag2 = stripTagPattern2.search(line)
+            # python has lazy evaluation so .group(1) can be written as a second condition here
+            # despite the fact that many times detailsStripTag will evaluate to None (.group(1)
+            # should not be called on None as this will result in an error)
+            if detailsStripTag and detailsStripTag.group(1) != "":
+                detailsCat[0] += detailsStripTag.group(1)
+            if detailsStripTag2 and detailsStripTag2.group(1) != "":
+                detailsCat[0] += detailsStripTag2.group(1)
+        if detailsCloseTag:
+            temp = line[:detailsCloseTag.start()]
+            detailsStripTag = stripTagPattern1.search(temp)
+            if detailsStripTag:
+                #print("contents of temp's group 1: ", detailsStripTag.group(1))
+                detailsCat[0] += detailsStripTag.group(1)
+            print("contents of detailsCat: ", detailsCat[0])
+            detailsCat[0] = ""
+            sentinel["detailsData"] = False
+            sentinel["details"] = False
+        
