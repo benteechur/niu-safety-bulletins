@@ -110,6 +110,38 @@ def parse_data(line, sentinel, detailsCat):
     if sentinel["details"]:
         detailsOpenTag = detailsDataOpenPattern.search(line)
         detailsCloseTag = detailsDataClosePattern.search(line)
+        
+        if detailsOpenTag:
+            sentinel["detailsData"] = True
+        if sentinel["detailsData"] and len(line) > 1:
+            temp = line.lstrip()
+            temp = temp.rstrip()
+            # 점 marks the end of a line
+            detailsCat[0] += temp + "점"
+
+        if detailsCloseTag:
+            temp = detailsCat[0]
+            count = temp.count("<")
+            for i in range(count):
+                begin = temp.find("<")
+                end = temp.find (">")
+                temp = temp[:begin] + temp[end+1:]
+
+            print("contents of detailsCat: ", detailsCat[0])
+            print("contents of temp: ", temp)
+            detailsCat[0] = ""
+            sentinel["detailsData"] = False
+            sentinel["details"] = False
+
+    """
+    # original, more difficult way of removing tags
+    detailsTag = detailsPattern.search(line)
+    if detailsTag:
+        sentinel["details"] = True
+        return
+    if sentinel["details"]:
+        detailsOpenTag = detailsDataOpenPattern.search(line)
+        detailsCloseTag = detailsDataClosePattern.search(line)
         if detailsOpenTag:
             sentinel["detailsData"] = True
         if sentinel["detailsData"]:
@@ -133,4 +165,4 @@ def parse_data(line, sentinel, detailsCat):
             detailsCat[0] = ""
             sentinel["detailsData"] = False
             sentinel["details"] = False
-        
+    """
