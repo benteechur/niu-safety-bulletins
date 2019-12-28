@@ -39,6 +39,11 @@ print(line_count)
 #print("printing bulletinObjects[-1]: ", bulletinObjects[-1])
 
 for i in range(len(bulletinObjects)):
-    print("{}: {}".format(i, bulletinObjects[i]))
+    #print("{}: {}".format(i, bulletinObjects[i]))
+    print("{}:".format(i))
+    print("Incident: {}".format(bulletinObjects[i].incident))
+    print("Date: {}".format(bulletinObjects[i].date))
+    print("Location: {}".format(bulletinObjects[i].location))
+    print("Details: {}".format(bulletinObjects[i].details))
     print()
 
