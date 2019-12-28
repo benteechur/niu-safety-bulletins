@@ -66,8 +66,8 @@ def parse_data(line, sentinel, tempData):
     incidentTag = incidentPattern.search(line)
     if incidentTag:
         # print() to separate output by blank line
-        print()
-        print("found match: ", incidentTag.group(2))
+        ##print()
+        ##print("found match: ", incidentTag.group(2))
         tempData["incident"] = incidentTag.group(2)
 
     dateTag = datePattern.search(line)
@@ -78,7 +78,7 @@ def parse_data(line, sentinel, tempData):
     if sentinel["date"]:
         dateDataTag = dateDataPattern.search(line)
         if dateDataTag:
-            print("found date data: ", dateDataTag.group(2))
+            ##print("found date data: ", dateDataTag.group(2))
             tempData["date"] = dateDataTag.group(2)
             sentinel["date"] = False
 
@@ -89,12 +89,12 @@ def parse_data(line, sentinel, tempData):
     if sentinel["location"]:
         locationDataTag = locationDataPattern.search(line)
         if locationDataTag:
-            print("found location data: ", locationDataTag.group(2))
+            ##print("found location data: ", locationDataTag.group(2))
             
             # this section for cleaning data - consider placing this in another function
             temp = locationDataTag.group(2)
             if "<" in temp:
-                print("extra tags here")
+                ##print("extra tags here")
                 locationStripTag = stripTagPattern1.search(temp)
                 # if a group is empty, it is equal to an empty string
                 if locationStripTag.group(1) == "":
@@ -102,7 +102,7 @@ def parse_data(line, sentinel, tempData):
                     newTemp = locationStripTag.group(1)
                 else:
                     newTemp = locationStripTag.group(1)
-                print("strippping tags from location data: ", newTemp)
+                ##print("strippping tags from location data: ", newTemp)
                 tempData["location"] = newTemp
             else:
                 tempData["location"] = locationDataTag.group(2)
@@ -136,8 +136,8 @@ def parse_data(line, sentinel, tempData):
                 temp = temp[:begin] + temp[end+1:]
 
             #print("contents of detailsCat: ", detailsCat[0])
-            print("contents of tempData['details']: ", tempData["details"])
-            print("contents of temp: ", temp)
+            ##print("contents of tempData['details']: ", tempData["details"])
+            ##print("contents of temp: ", temp)
             tempData["details"] = temp
             tempObject = B.Bulletin(tempData["incident"], tempData["date"], tempData["location"], tempData["details"])
             #detailsCat[0] = ""
