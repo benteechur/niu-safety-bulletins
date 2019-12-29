@@ -6,7 +6,7 @@ url = 'https://www.niu.edu/publicsafety/emergency/safetybulletin/archive.shtml'
 # while dictionaries aren't). this could also have been accomplished with a list
 sentinel = {"date": False, "location": False, "details": False, "detailsData": False}
 tempData = {"incident": "", "date": "", "location": "", "details": ""}
-detailsCat = [""]
+#detailsCat = [""]
 bulletinObjects = []
 
 # the entire contents of the page at "url" are now saved in a file named fileName
@@ -34,7 +34,16 @@ for line in file:
 
 print(line_count)
 # print first object in list
-print("printing bulletinObjects[0]: ", bulletinObjects[0])
+#print("printing bulletinObjects[0]: ", bulletinObjects[0])
 # print last object in list
-print("printing bulletinObjects[-1]: ", bulletinObjects[-1])
+#print("printing bulletinObjects[-1]: ", bulletinObjects[-1])
+
+for i in range(len(bulletinObjects)):
+    #print("{}: {}".format(i, bulletinObjects[i]))
+    print("{}:".format(i))
+    print("Incident: {}".format(bulletinObjects[i].incident))
+    print("Date: {}".format(bulletinObjects[i].date))
+    print("Location: {}".format(bulletinObjects[i].location))
+    print("Details: {}".format(bulletinObjects[i].details))
+    print()
 
