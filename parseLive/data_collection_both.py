@@ -72,5 +72,7 @@ print('The cleaned df for new notifications is:\n', df_clean_new)
 #writer_old.close()
 
 # Export the two df to csv files. (will overwrite existing files)
-df_clean_new.to_csv(r'D:\1Study\Git\niu-safety-bulletins\Test files\new_notifications.csv', index = False, encoding = 'utf-8-sig')
-df_clean_old.to_csv(r'D:\1Study\Git\niu-safety-bulletins\Test files\old_notifications.csv', index = False, encoding = 'utf-8-sig')
+#!!! CHANGE THE PATH BEFORE RUNNING THE CODE
+path = r'D:\1Study\Git\niu-safety-bulletins\Test files'
+df_clean_new.to_csv(path + r'\new_notifications1.csv', index = False, encoding = 'utf-8-sig')
+df_clean_old.to_csv(path + r'\old_notifications1.csv', index = False, encoding = 'utf-8-sig')
