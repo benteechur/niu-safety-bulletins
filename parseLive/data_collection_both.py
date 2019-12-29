@@ -13,6 +13,7 @@ response_new = urlopen(url_new)
 
 # Parse the html with BeautifulSoup and find all the <tr> tag
 soup_old = BeautifulSoup(response_old, 'lxml')
+##, from_encoding = 'utf-8')
 rows_old = soup_old.find_all('tr')
 soup_new = BeautifulSoup(response_new, 'lxml')
 rows_new = soup_new.find_all('tr')
@@ -52,9 +53,24 @@ df_clean_new = fns.clean_df(df_new)
 print('The cleaned df for archived notifications is:\n', df_clean_old)
 print('The cleaned df for new notifications is:\n', df_clean_new)
 
+#********************** Export dataframe to csv files ************************
 
-################### Test #############
-# export the two df to csv.
+# Export the two df to xlsx files. (put new version into the same excel file
+# but different sheets)
+#path_new = r'D:\1Study\Git\niu-safety-bulletins\Test files\new_notifications.xlsx'
+#path_old = r'D:\1Study\Git\niu-safety-bulletins\Test files\old_notifications.xlsx'
 
-df_clean_new.to_csv(r'D:\1Study\Git\niu-safety-bulletins\Test files\new_notifications.csv', index = False)
-df_clean_old.to_csv(r'D:\1Study\Git\niu-safety-bulletins\Test files\old_notifications.csv', index = False)
+#writer_new = pd.ExcelWriter(path_new, engine = 'xlsxwriter')
+#writer_old = pd.ExcelWriter(path_old, engine = 'xlsxwriter')
+
+#df_clean_new.to_excel(writer_new, sheet_name = 'v1')
+#df_clean_old.to_excel(writer_old, sheet_name = 'v1')
+
+#writer_new.save()
+#writer_old.save()
+#writer_new.close()
+#writer_old.close()
+
+# Export the two df to csv files. (will overwrite existing files)
+df_clean_new.to_csv(r'D:\1Study\Git\niu-safety-bulletins\Test files\new_notifications.csv', index = False, encoding = 'utf-8-sig')
+df_clean_old.to_csv(r'D:\1Study\Git\niu-safety-bulletins\Test files\old_notifications.csv', index = False, encoding = 'utf-8-sig')
