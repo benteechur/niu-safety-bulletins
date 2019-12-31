@@ -17,20 +17,21 @@ def process_records(x):
         str_header = str(row_header)
         clean_header = BeautifulSoup(str_header, 'lxml').get_text()
         ##splitted_header = clean_header.split(',')
-        splitted_header = re.split(r'Incident:', clean_header)
+        ##split_header = re.split(r'Incident:', clean_header)
+        split_header = re.split(r': ,|:,', clean_header)
 
         row_content = row.find_all('td')
         str_content = str(row_content)
         clean_content = BeautifulSoup(str_content, 'lxml').get_text()
-        splitted_content = re.split(r': ,|:,', clean_content)
+        split_content = re.split(r': ,|:,', clean_content)
 
         if len(clean_header) > 2:
             safety_lst += [row_lst]
             row_lst = []
-            row_lst += splitted_header
+            row_lst += split_header
             #row_lst += [clean_header]
         if len(clean_content) > 2:
-            row_lst += splitted_content
+            row_lst += split_content
     safety_lst += [row_lst]
     return safety_lst
 
