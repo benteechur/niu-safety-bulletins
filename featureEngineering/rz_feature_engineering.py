@@ -32,5 +32,5 @@ print()
 
 # Export the dfs after data engineering
 path = r'C:\Users\zhang\Desktop\Test files'
-df_new.to_csv(path + r'\feature_new_bulletin.csv', index = False)
-df_old.to_csv(path + r'\feature_old_bulletin.csv', index = False)
+df_new.to_csv(path + r'\feature_new_bulletin.csv', index = False, encoding = 'utf-8-sig')
+df_old.to_csv(path + r'\feature_old_bulletin.csv', index = False, encoding = 'utf-8-sig')
