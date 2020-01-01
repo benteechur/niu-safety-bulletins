@@ -46,7 +46,7 @@ df_new = pd.DataFrame(lst_new)
 
 # Export the two df to csv files. (will overwrite existing files)
 #!!! CHANGE THE PATH BEFORE RUNNING THE CODE
-path = r'D:\1Study\Git\niu-safety-bulletins\Test files'
+path = r'C:\Users\zhang\Desktop\Test files'
 df_new.to_csv(path + r'\webscrape_new_bulletin.csv', index = False, encoding = 'utf-8-sig')
 df_old.to_csv(path + r'\webscrape_old_bulletin.csv', index = False, encoding = 'utf-8-sig')
 
@@ -62,6 +62,6 @@ print('The cleaned df for new notifications is:\n', df_clean_new)
 #********************** Export cleaned df to csv files ************************
 # Export the two df to csv files. (will overwrite existing files)
 #!!! CHANGE THE PATH BEFORE RUNNING THE CODE
-path = r'D:\1Study\Git\niu-safety-bulletins\Test files'
+path = r'C:\Users\zhang\Desktop\Test files'
 df_clean_new.to_csv(path + r'\clean_new_bulletin.csv', index = False, encoding = 'utf-8-sig')
 df_clean_old.to_csv(path + r'\clean_old_bulletin.csv', index = False, encoding = 'utf-8-sig')
