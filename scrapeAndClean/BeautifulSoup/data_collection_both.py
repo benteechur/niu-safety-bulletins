@@ -1,9 +1,15 @@
 # Import necessary packages
-import requests, time, re
+import requests, time, re, os
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import pandas as pd
 import functions as fns
+
+# Set the path for exporting files
+username = os.environ['username']
+path = r'C:\Users' + '\\' + username + r'\Desktop\Test'
+if not os.path.exists(path):
+    os.makedirs(path)
 
 # Set url and access the site with requests lib
 url_old = 'https://www.niu.edu/publicsafety/emergency/safetybulletin/archive.shtml'
@@ -13,7 +19,6 @@ response_new = urlopen(url_new)
 
 # Parse the html with BeautifulSoup and find all the <tr> tag
 soup_old = BeautifulSoup(response_old, 'lxml')
-##, from_encoding = 'utf-8')
 rows_old = soup_old.find_all('tr')
 soup_new = BeautifulSoup(response_new, 'lxml')
 rows_new = soup_new.find_all('tr')
@@ -45,8 +50,6 @@ df_old = pd.DataFrame(lst_old)
 df_new = pd.DataFrame(lst_new)
 
 # Export the two df to csv files. (will overwrite existing files)
-#!!! CHANGE THE PATH BEFORE RUNNING THE CODE
-path = r'C:\Users\zhang\Desktop\Test files'
 df_new.to_csv(path + r'\webscrape_new_bulletin.csv', index = False, encoding = 'utf-8-sig')
 df_old.to_csv(path + r'\webscrape_old_bulletin.csv', index = False, encoding = 'utf-8-sig')
 
@@ -61,7 +64,5 @@ print('The cleaned df for new notifications is:\n', df_clean_new)
 
 #********************** Export cleaned df to csv files ************************
 # Export the two df to csv files. (will overwrite existing files)
-#!!! CHANGE THE PATH BEFORE RUNNING THE CODE
-path = r'C:\Users\zhang\Desktop\Test files'
 df_clean_new.to_csv(path + r'\clean_new_bulletin.csv', index = False, encoding = 'utf-8-sig')
 df_clean_old.to_csv(path + r'\clean_old_bulletin.csv', index = False, encoding = 'utf-8-sig')

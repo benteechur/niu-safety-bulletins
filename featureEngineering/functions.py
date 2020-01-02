@@ -5,7 +5,7 @@ import pandas as pd
 # Arguments: takes a dataframe
 # Returns:   nothing (updates the df in place)
 
-crime_lst = ['robbery', 'battery', 'burglary', 'burglaries', 'theft', 'firearm',
+crime_lst = ['robbery', 'battery', 'burglary', 'burglaries', 'theft[s]?', 'firearm',
 'shots', 'shooting', 'fire', 'arson', 'assault', 'invasion']
 crime_re_lst = [re.compile(r'\b' + i + r'\b') for i in crime_lst]
 
