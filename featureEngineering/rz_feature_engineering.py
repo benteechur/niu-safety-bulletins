@@ -1,7 +1,7 @@
 # Import packages
 import pandas as pd
 from functions import *
-import os
+import os, re
 
 # Set the path for exporting files
 username = os.environ['username']
@@ -23,15 +23,23 @@ print()
 #df_new['Location'] = df_new['Location'].str.lstrip() #--> eliminate the white
 # space at the beginning of cells
 
-# Add "Crime Type" column
+# Add 'Crime Type' column
 add_crime_type(df_new)
 add_crime_type(df_old)
 
+# Add 'Location_map' column
+add_loc_map(df_new)
+add_loc_map(df_old)
+
+# Rearrange the columns order
+df_old = df_old[['Incident', 'Crime Type', 'Date Occurred', 'Location',
+                 'Location_map', 'Details']]
+
+print('df_new after adding city is:\n', df_new)
 print()
-print('df_old after adding new column:\n', df_old[['Incident', 'Crime Type']].head(30))
-print()
-print('df_new after adding new column:\n', df_new[['Incident', 'Crime Type']].head(30))
-print()
+print('The updated location of record 35 is: ', df_old['Location_map'][35])
+print('The updated location of the last record is: \n', df_old['Location_map'][82])
+print('The updated locations for top 10 records: ', df_old[['Location_map']].head(10))
 
 # Export the dfs after data engineering
 df_new.to_csv(path + r'\feature_new_bulletin.csv', index = False, encoding = 'utf-8-sig')
