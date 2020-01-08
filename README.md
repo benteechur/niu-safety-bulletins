@@ -8,3 +8,6 @@ simple web scraper with simple example
 
 
 {google_map}http://mapsengine.google.com/map/embed?mid=zfQVCQIZMXcw.k_hSHl4b24jM{/google_map}
+
+
+<iframe src="https://www.google.com/maps/d/embed?mid=14RkKI6VjIGUDi8CqfpKRDJZTV5ZlkuMJ" width="640" height="480"></iframe>
