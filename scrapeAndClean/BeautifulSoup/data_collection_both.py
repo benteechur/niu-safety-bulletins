@@ -58,7 +58,7 @@ df.to_csv(path + r'\webscrape_bulletin.csv', index = False, encoding = 'utf-8-si
 
 #***************************** Data Cleaning **********************************
 # Clean up the DataFrame using "clean_df(df)" function
-df_clean = fns.clean_df(df_old)
+df_clean = fns.clean_df(df)
 
 # Export the two df to csv files. (will overwrite existing files)
 df_clean.to_csv(path + r'\clean_bulletin.csv', index = False, encoding = 'utf-8-sig')
