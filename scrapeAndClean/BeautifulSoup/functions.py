@@ -46,7 +46,8 @@ def clean_df(df):
     # Drop useless columns and rows
     df.drop(df.columns[8:], axis = 1, inplace = True)
     df.drop([0, 2, 4, 6], axis = 1, inplace = True)
-    df.drop([0], axis = 0, inplace = True)
+    ##df.drop([0], axis = 0, inplace = True)
+    df.dropna(inplace = True)
     #print('after dropping: \n', df) #--> for checking purpose
     # Get rid of useless characters in text
     df[1] = df[1].str.lstrip(', ')

@@ -49,20 +49,18 @@ pd.set_option('display.max_columns', 100)
 df_old = pd.DataFrame(lst_old)
 df_new = pd.DataFrame(lst_new)
 
+# Combine two dfs
+frames = [df_new, df_old]
+df = pd.concat(frames, ignore_index = True)
+
 # Export the two df to csv files. (will overwrite existing files)
-df_new.to_csv(path + r'\webscrape_new_bulletin.csv', index = False, encoding = 'utf-8-sig')
-df_old.to_csv(path + r'\webscrape_old_bulletin.csv', index = False, encoding = 'utf-8-sig')
+df.to_csv(path + r'\webscrape_bulletin.csv', index = False, encoding = 'utf-8-sig')
 
 #***************************** Data Cleaning **********************************
 # Clean up the DataFrame using "clean_df(df)" function
-df_clean_old = fns.clean_df(df_old)
-df_clean_new = fns.clean_df(df_new)
+df_clean = fns.clean_df(df)
 
-# Print out the cleaned df
-print('The cleaned df for archived notifications is:\n', df_clean_old)
-print('The cleaned df for new notifications is:\n', df_clean_new)
-
-#********************** Export cleaned df to csv files ************************
 # Export the two df to csv files. (will overwrite existing files)
-df_clean_new.to_csv(path + r'\clean_new_bulletin.csv', index = False, encoding = 'utf-8-sig')
-df_clean_old.to_csv(path + r'\clean_old_bulletin.csv', index = False, encoding = 'utf-8-sig')
+df_clean.to_csv(path + r'\clean_bulletin.csv', index = False, encoding = 'utf-8-sig')
+
+print('Both "webscrape_bulletin.csv" and "clean_bulletin.csv" exported successfully!\n')
