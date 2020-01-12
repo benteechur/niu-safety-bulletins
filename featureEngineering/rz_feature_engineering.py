@@ -21,9 +21,33 @@ add_crime_type(df)
 # Add 'Location_map' column
 add_loc_map(df)
 
+# Add 'Year', 'Month', and 'Day' columns based on 'Date Occurred'
+print('\nDate Occurred column before conversion:\n', df['Date Occurred'])
+# Convert 'Date Occurred' column to datetime date type
+df['Date Occurred'] = pd.to_datetime(df['Date Occurred'])
+##print('\nDate Occurred column after conversion:\n', df['Date Occurred'])
+print('\nData type after coversion: \n', df.dtypes)
+# Exact month from 'Date Occurred' column
+# Method 1 (without converting to datetime data type):
+# https://www.interviewqs.com/ddi_code_snippets/extract_month_year_pandas
+#df['Month Occurred'] = pd.DatetimeIndex(df['Date Occurred']).month
+# Method 2 (has to convert to datetime data type):
+df['Year'] = df['Date Occurred'].dt.year
+df['Month'] = df['Date Occurred'].dt.month
+df['Day'] = df['Date Occurred'].dt.day
+
+# Add 'Time' column
+extract_time(df, 'Details')
+print('\nafter extraction of time:\n', df['Time'])
+print('\nCell 49 after extraction of time is:\n', df['Time'][48])
+print('\n"Time_digit" column: \n', df['Time_24'].head(30))
+print('\ncell 47 after extracting the time is:\n', df['Time_24'][47])
+
 # Rearrange the columns order
-df = df[['Incident', 'Crime Type', 'Date Occurred', 'Location',
-                 'Location_map', 'Details']]
+df = df[['Incident', 'Crime Type', 'Date Occurred', 'Year', 'Month', 'Day',
+         'Location', 'Location_map', 'Time', 'Time_24', 'Details']]
+print('\ndf after extraction:\n', df)
+
 
 # Export the dfs after data engineering
 df.to_csv(path + r'\feature_bulletin.csv', index = False, encoding = 'utf-8-sig')
