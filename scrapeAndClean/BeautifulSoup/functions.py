@@ -58,6 +58,12 @@ def clean_df(df):
     # Change the column index
     df_header = ['Incident', 'Date Occurred', 'Location', 'Details']
     df.columns = df_header
+    # Remove the redundant part in Details column
+    start_pattern = 'If you have any information related to this incident'
+    df['Details'] = [x[:x.find(start_pattern)] for x in df['Details']]
+    # Strip white spaces for all the values
+    for col in df.columns:
+        df[col] = df[col].str.strip()
     return df
 
 # Function:  the function to test nan values in a column
