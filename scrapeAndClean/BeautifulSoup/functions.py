@@ -59,8 +59,10 @@ def clean_df(df):
     df_header = ['Incident', 'Date Occurred', 'Location', 'Details']
     df.columns = df_header
     # Remove the redundant part in Details column
-    start_pattern = 'If you have any information related to this incident'
-    df['Details'] = [x[:x.find(start_pattern)] for x in df['Details']]
+    # Commenting out the following two lines of code because it has some
+    # mistakes for some records. Will come back later
+    #start_pattern = 'If you have any information related to this incident'
+    #df['Details'] = [x[:x.find(start_pattern)] for x in df['Details']]
     # Strip white spaces for all the values
     for col in df.columns:
         df[col] = df[col].str.strip()
