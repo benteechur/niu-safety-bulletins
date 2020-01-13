@@ -40,14 +40,19 @@ df['Day'] = df['Date Occurred'].dt.day
 extract_time(df, 'Details')
 print('\nafter extraction of time:\n', df['Time'])
 print('\nCell 49 after extraction of time is:\n', df['Time'][48])
-print('\n"Time_digit" column: \n', df['Time_24'].head(30))
-print('\ncell 47 after extracting the time is:\n', df['Time_24'][47])
+
+# Add 'Time_24' column
+add_time_24(df)
+print('\n"Time_24" column: \n', df['Time_24'].head(30))
+print('\ncell 47 for "Time_24" column is:\n', df['Time_24'][47])
+# Convert values in 'Time_24' column into datetime data type
+df['Time_24'] = pd.to_datetime(df['Time_24'], format = '%H:%M').dt.time
+print('\n"Time_24" after conversion is:\n', df['Time_24'].head(35))
+print('\ncell 48 of "Time_24" after conversion is: \n', df['Time_24'][48])
 
 # Rearrange the columns order
 df = df[['Incident', 'Crime Type', 'Date Occurred', 'Year', 'Month', 'Day',
          'Location', 'Location_map', 'Time', 'Time_24', 'Details']]
-print('\ndf after extraction:\n', df)
-
 
 # Export the dfs after data engineering
 df.to_csv(path + r'\feature_bulletin.csv', index = False, encoding = 'utf-8-sig')

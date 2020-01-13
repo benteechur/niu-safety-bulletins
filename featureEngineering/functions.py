@@ -116,9 +116,17 @@ def extract_time(df, col):
                                   [ap]\.*?m\.*? # a.m. or p.m.''', re.IGNORECASE | re.X)
     df['Time'] = [time_pattern.search(x).group(0) if time_pattern.search(x) else pd.NaT for x in df[col]]
 
-    df['Time_24'] = 0
-    for x in range(0, df.shape[0]):
-        if pd.isna(df['Time'][x]):
-            df['Time_24'][x] = pd.NaT
-        else:
-            df['Time_24'][x] = convert_hour(df['Time'][x])
+
+# Function:  the function add a new column 'Time_24' to the df
+# Arguments: it takes the df that needs the column to be added
+# Returns:   nothing (updates the df)
+
+def add_time_24(df):
+    df['Time_24'] = [pd.NaT if pd.isna(df['Time'][x])
+                     else convert_hour(df['Time'][x])
+                     for x in range(0, df.shape[0])]
+    # Format 'Time_24'
+    # elif in list comprehension: https://stackoverflow.com/questions/9987483/elif-in-list-comprehension-conditionals
+    df['Time_24'] = [pd.NaT if pd.isna(df['Time_24'][x]) else
+                     df['Time_24'][x] if len(df['Time_24'][x]) > 3
+                     else df['Time_24'][x] + ':00' for x in range(0, df.shape[0])]
