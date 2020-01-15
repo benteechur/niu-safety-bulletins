@@ -20,7 +20,8 @@ def add_crime_type(df):
                 temp_lst.append(match.group())
         length = len(temp_lst)
         if length == 0:
-            temp = pd.NaT
+            ##temp = pd.NaT
+            temp = 'non-crime'
         elif length == 1:
             temp = temp_lst[0]
         else:
