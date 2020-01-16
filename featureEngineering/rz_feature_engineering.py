@@ -2,6 +2,7 @@
 import pandas as pd
 from functions import *
 import os, re
+import googlemaps
 
 # Set the path for exporting files
 username = os.environ['username']
@@ -49,9 +50,7 @@ add_loc_map(df)
 ##df = df[['Incident', 'Crime Type', 'Date Occurred', 'Year', 'Month', 'Day',
 ##         'Dayofweek', 'Time_24', 'Location', 'Location_map', 'Details']]
 
-
-
-# Rearrange code to work better in Tableau
+# Rearrange code for creating time related columns to work better in Tableau
 # Add 'Time_24' column
 extract_time(df, 'Details')
 add_time_24(df)
@@ -60,9 +59,28 @@ df['DateTime'] = pd.to_datetime(df['Date Occurred'] + ' ' + df['Time_24'])
 # Convert 'Date Occurred' column to datetime type to create new column 'Dayofweek'
 df['Date Occurred'] = pd.to_datetime(df['Date Occurred'])
 df['Dayofweek'] = df['Date Occurred'].dt.weekday_name
+
+print('\ndf before adding coordinates:\n', df.head(20))
+#print('\nif latitude or longitude in df: ', 'Location_map' in df.columns)
+
+# Add 'Latitude' and 'Longitude' columns
+API_key = input('\n\nPLEASE ENTER THE GOOGLE MAP API KEY: ')
+
+if 'Latitude' not in df.columns and 'Longitude' not in df.columns:
+    df['Latitude'] = pd.NaT # --> this is not right, everytime these two columns won't be there.
+    df['Longitude'] = pd.NaT
+print('\nafter initiating new columns: \n', df)
+for i in range(0, 10):
+    if not pd.isna(df.iat[i, df.columns.get_loc('Location_map')]) and pd.isna(df.iat[i, df.columns.get_loc('Latitude')]):
+        #get_latlng(df, i, API_key)
+        df.iat[i, df.columns.get_loc('')]
+
+print('\n The df after adding latlng is: \n', df.head(15))
+
 # Rearrange columns order
-df = df[['Incident', 'Crime Type', 'DateTime', 'Dayofweek', 'Location', 'Location_map', 'Details']]
+df = df[['Incident', 'Crime Type', 'DateTime', 'Dayofweek', 'Location',
+         'Latitude', 'Longitude', 'Details']]
 
 # Export the dfs after data engineering
-df.to_csv(path + r'\feature_bulletin.csv', index = False, encoding = 'utf-8-sig')
-print('\n"feature_bulletin.csv" exported successfully!\n')
+##df.to_csv(path + r'\feature_bulletin.csv', index = False, encoding = 'utf-8-sig')
+##print('\n"feature_bulletin.csv" exported successfully!\n')
