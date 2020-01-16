@@ -55,7 +55,13 @@ add_loc_map(df)
 extract_time(df, 'Details')
 add_time_24(df)
 # Combine date and time to create new datetime type column 'DateTime'
-df['DateTime'] = pd.to_datetime(df['Date Occurred'] + ' ' + df['Time_24'])
+##df['DateTime'] = [pd.to_datetime(df['Date Occurred'][x]) if pd.isna(df['Time_24'][x])
+##                  else pd.to_datetime(df['Date Occurred'][x] + ' ' + df['Time_24'][x])
+##                  for x in range(0, df.shape[0])]
+df['DateTime'] = [df['Date Occurred'][x] if pd.isna(df['Time_24'][x])
+                  else df['Date Occurred'][x] + ' ' + df['Time_24'][x]
+                  for x in range(0, df.shape[0])]
+
 # Convert 'Date Occurred' column to datetime type to create new column 'Dayofweek'
 df['Date Occurred'] = pd.to_datetime(df['Date Occurred'])
 df['Dayofweek'] = df['Date Occurred'].dt.weekday_name
@@ -64,7 +70,8 @@ print('\ndf before adding coordinates:\n', df.head(20))
 #print('\nif latitude or longitude in df: ', 'Location_map' in df.columns)
 
 # Add 'Latitude' and 'Longitude' columns
-add_latlng(df)
+##add_latlng(df)
+
 '''
 API_key = input('\n\nPLEASE ENTER THE GOOGLE MAP API KEY: ')
 
@@ -79,11 +86,13 @@ for i in range(0, 10):
 '''
 
 # Rearrange columns order
-df = df[['Incident', 'Crime Type', 'DateTime', 'Dayofweek', 'Location',
-         'Latitude', 'Longitude', 'Details']]
+##df = df[['Incident', 'Crime Type', 'DateTime', 'Dayofweek', 'Location',
+##         'Latitude', 'Longitude', 'Details']]
+df = df[['Incident', 'Crime Type', 'DateTime', 'Date Occurred', 'Time_24', 'Dayofweek', 'Location',
+          'Details']]
 
 print('\n The df after adding latlng is: \n', df.head(30))
 
 # Export the dfs after data engineering
-df.to_csv(path + r'\feature_bulletin.csv', index = False, encoding = 'utf-8-sig')
-print('\n"feature_bulletin.csv" exported successfully!\n')
+df.to_csv(path + r'\test_feature_bulletin.csv', index = False, encoding = 'utf-8-sig')
+##print('\n"feature_bulletin.csv" exported successfully!\n')
