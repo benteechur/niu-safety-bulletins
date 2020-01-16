@@ -64,6 +64,8 @@ print('\ndf before adding coordinates:\n', df.head(20))
 #print('\nif latitude or longitude in df: ', 'Location_map' in df.columns)
 
 # Add 'Latitude' and 'Longitude' columns
+add_latlng(df)
+'''
 API_key = input('\n\nPLEASE ENTER THE GOOGLE MAP API KEY: ')
 
 if 'Latitude' not in df.columns and 'Longitude' not in df.columns:
@@ -74,13 +76,14 @@ for i in range(0, 10):
     if not pd.isna(df.iat[i, df.columns.get_loc('Location_map')]) and pd.isna(df.iat[i, df.columns.get_loc('Latitude')]):
         #get_latlng(df, i, API_key)
         df.iat[i, df.columns.get_loc('')]
-
-print('\n The df after adding latlng is: \n', df.head(15))
+'''
 
 # Rearrange columns order
 df = df[['Incident', 'Crime Type', 'DateTime', 'Dayofweek', 'Location',
          'Latitude', 'Longitude', 'Details']]
 
+print('\n The df after adding latlng is: \n', df.head(30))
+
 # Export the dfs after data engineering
-##df.to_csv(path + r'\feature_bulletin.csv', index = False, encoding = 'utf-8-sig')
-##print('\n"feature_bulletin.csv" exported successfully!\n')
+df.to_csv(path + r'\feature_bulletin.csv', index = False, encoding = 'utf-8-sig')
+print('\n"feature_bulletin.csv" exported successfully!\n')

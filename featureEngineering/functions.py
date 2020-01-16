@@ -145,21 +145,22 @@ def add_time_24(df):
 # Arguments:
 # Returns:
 
-def get_latlng(df, row, API_key):
+#def get_latlng(df, row, API_key):
+def add_latlng(df):
     # Try 1:
     # Ref(X): https://stackoverflow.com/questions/5807195/how-to-get-coordinates-of-address-from-python/32333188
     # Ref: https://www.youtube.com/watch?v=vTFn9gWEtPA
     # This requires my own API key.
-
+    '''
     gmaps = googlemaps.Client(key = API_key)
     geocode_result = gmaps.geocode(df.iat[row, df.columns.get_loc('Location_map')])
     lat = geocode_result[0]['geometry']['location']['lat']
     lng = geocode_result[0]['geometry']['location']['lng']
     df.iat[row, df.columns.get_loc('Latitude')] = lat
     df.iat[row, df.columns.get_loc('Longitude')] = lng
-
-
     '''
+
+
     API_key = input('\n\nPLEASE ENTER THE GOOGLE MAP API KEY: ')
     gmaps = googlemaps.Client(key = API_key)
 
@@ -174,11 +175,11 @@ def get_latlng(df, row, API_key):
             df.iat[i, df.columns.get_loc('Latitude')] = lat
             df.iat[i, df.columns.get_loc('Longitude')] = lng
         else:
-            lat = None
-            lng = None
+            lat = pd.NaT
+            lng = pd.NaT
 
-    print('\nafter geocoding\n', df)
-    '''
+    #print('\nafter geocoding\n', df)
+
     # Test: one address
 
     #df[['Latitude', 'Longitude']] = [gmaps.address_to_latlng(x) for x in df['Location_map'][x]]
