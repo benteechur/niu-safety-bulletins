@@ -122,7 +122,8 @@ def extract_time(df, col):
     time_pattern = re.compile(r'''\bat\b\s(.*?) # start with 'at' with or without any other words between 'at' and the time
                                   \d+:*\d*      # time format, such as 7:35
                                   \s            # followed by with or without white spaces
-                                  [ap]\.*?m\.*? # a.m. or p.m.''', re.IGNORECASE | re.X)
+                                  [ap]\.*?m\.*? # a.m. or p.m.
+                                  |\bmidnight\b # or contains 'midnight' ''', re.IGNORECASE | re.X)
     df['Time'] = [time_pattern.search(x).group(0) if time_pattern.search(x) else pd.NaT for x in df[col]]
 
 
@@ -130,8 +131,10 @@ def extract_time(df, col):
 # Arguments: it takes the df that needs the column to be added
 # Returns:   nothing (updates the df)
 
+special_time = {'midnight':'00:00', 'noon':'12:00'}
 def add_time_24(df):
     df['Time_24'] = [pd.NaT if pd.isna(df['Time'][x])
+                     else special_time[df['Time'][x]] if df['Time'][x] in special_time
                      else convert_hour(df['Time'][x])
                      for x in range(0, df.shape[0])]
     # Format 'Time_24'
