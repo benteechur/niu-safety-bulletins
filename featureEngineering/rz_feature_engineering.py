@@ -42,6 +42,10 @@ df['Dayofweek'] = df['Date Occurred'].dt.weekday_name #--> don't need it since T
 extract_time(df, 'Details')
 # Add 'Time_24' column
 add_time_24(df)
+# Prepare columns for exporting the csv file which will be used by Google My Map
+df_mymap = df[['Incident', 'Crime Type', 'Date Occurred', 'Time_24', 'Dayofweek',
+               'Location_map', 'Details']]
+
 # Convert values in 'Time_24' column into datetime data type
 df['Time_24'] = pd.to_datetime(df['Time_24']).dt.time
 
@@ -71,19 +75,20 @@ print('\ndf before adding coordinates:\n', df.head(20))
 #print('\nif latitude or longitude in df: ', 'Location_map' in df.columns)
 '''
 # Add 'Latitude' and 'Longitude' columns
-add_latlng(df)
+##add_latlng(df)
 
 #print('\nto check time for cell 36:', df['Time_24'][36])
 
 # Rearrange columns order
 ##df = df[['Incident', 'Crime Type', 'DateTime', 'Dayofweek', 'Location',
 ##         'Latitude', 'Longitude', 'Details']]
-df = df[['Incident', 'Crime Type', 'Date Occurred', 'Time_24', 'Dayofweek',
-         'Location', 'Location_map', 'Latitude', 'Longitude', 'Details']]
+##df_tableau = df[['Incident', 'Crime Type', 'Date Occurred', 'Time_24', 'Dayofweek',
+##         'Location', 'Location_map', 'Latitude', 'Longitude', 'Details']]
 
 #print('\n The df after adding latlng is: \n', df.head(38))
 
 
 # Export the dfs after data engineering
-df.to_csv(path + r'\feature_bulletin.csv', index = False, encoding = 'utf-8-sig')
-print('\n"feature_bulletin.csv" exported successfully!\n')
+##df_tableau.to_csv(path + r'\feature_bulletin.csv', index = False, encoding = 'utf-8-sig')
+df_mymap.to_csv(path + r'\feature_bulletin_mymap.csv', index = False, encoding = 'utf-8-sig')
+print('\nBoth "feature_bulletin_tableau.csv" and "feature_bulletin_mymap.csv" exported successfully!\n')
