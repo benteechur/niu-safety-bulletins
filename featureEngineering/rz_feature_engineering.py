@@ -57,6 +57,6 @@ df_tableau = df[['Incident', 'Crime Type', 'Date Occurred', 'Time_24', 'Dayofwee
          'Location', 'Location_map', 'Latitude', 'Longitude', 'Details']]
 
 # Export the dfs after data engineering
-df_tableau.to_csv(path + r'\feature_bulletin.csv', index = False, encoding = 'utf-8-sig')
+df_tableau.to_csv(path + r'\feature_bulletin_tableau.csv', index = False, encoding = 'utf-8-sig')
 df_mymap.to_csv(path + r'\feature_bulletin_mymap.csv', index = False, encoding = 'utf-8-sig')
 print('\nBoth "feature_bulletin_tableau.csv" and "feature_bulletin_mymap.csv" exported successfully!\n')
