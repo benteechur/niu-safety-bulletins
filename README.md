@@ -11,7 +11,20 @@ Campus Safety is always an important issue for both students and faculties. Nort
 Running above programs, the following Python packages and Google Map API key are required:
 1. Python packages:
 
-   `time`, `re`, `os`, `urllib`, `bs4`, `pandas`, `googlemaps`
+   `bs4`, `pandas`, `googlemaps`
+   
+   To install above packages, you can run the following code in the command line to install a single package:
+   
+   `pip install *package_name*` 
+   
+   For example:
+   
+   `pip install googlemaps`
+   
+   To install several packages at the same time, simply pass them as a space-delimited list, for example:
+   
+   `pip install bs4 pandas googlemaps`
+   
 2. Google Map API:
 
    Google Map API was used in the feature engineering program to get coordinates so that crime locations can be plotted in Tableau. If 
