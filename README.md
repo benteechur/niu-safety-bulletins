@@ -4,7 +4,7 @@ Campus Safety is always an important issue for both students and faculty. Northe
 ## Quick Links
 1. [Raw data](https://www.niu.edu/publicsafety/emergency/safetybulletin/index.shtml) --> Original safety bulletin notifications on NIU's website
 2. [Data collection programs](https://github.com/benteechur/niu-safety-bulletins/blob/master/scrapeAndClean/BeautifulSoup/data_collection_both.py) --> Web scraping and data cleaning program 
-3. [Feature engineering programs](https://github.com/benteechur/niu-safety-bulletins/blob/master/featureEngineering/rz_feature_engineering.py) --> Attributes manipulation (you'll be asked to **type in the API key through the command line**)
+3. [Feature engineering programs](https://github.com/benteechur/niu-safety-bulletins/blob/master/featureEngineering/rz_feature_engineering.py) --> Attributes manipulation (you'll be asked to **type in an API key through the command line**)
 4. Data visualizations
 
 ## Instructions
