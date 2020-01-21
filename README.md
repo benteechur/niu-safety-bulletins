@@ -25,9 +25,9 @@ To run the above programs, the following Python packages and a Google Maps API k
    
    `pip install bs4 pandas googlemaps`
    
-2. Google Map API:
+2. Google Maps API:
 
-   Google Map API was used in the feature engineering program to get coordinates for street addresses so that crime locations could be plotted in Tableau. If the
+   Google Maps API was used in the feature engineering program to get coordinates for street addresses so that crime locations could be plotted in Tableau. If the
    user wants to get the final dataset, a Google Maps API key is needed.
    
    To get a Google Maps API key, you can follow the instruction [here](https://elfsight.com/blog/2018/06/how-to-get-google-maps-api-key-guide/). 
@@ -58,7 +58,7 @@ After deleting the extra columns, there are only 4 attributes which are "Inciden
   * `Location`: spefifies the location where the incident happened. (Note: some of the records don't have this value because of the type of notification. For example, if the notification is about crime then it's supposed to have location, but if it's just a community awareness notification then it might not have location)
   * `Location_map` (new): generated based on `Location`. This was used for ploting the location on maps, either in Google Maps or Tableau
   * `Latitude` (new): generated based on `Location_map` using the Google Maps API. It will be used in plotting location in Tableau
-  * `Longitud` (new): generated based on `Location_map` using the Google Maps API. It will be used in plotting location in Tableau
+  * `Longitude` (new): generated based on `Location_map` using the Google Maps API. It will be used in plotting location in Tableau
   * `Details`: includes more detailed information about the incidents
   
 Two additional files will be generated under the "Test" folder on your desktop after running "[rz_feature_engineering.py](https://github.com/benteechur/niu-safety-bulletins/blob/master/featureEngineering/rz_feature_engineering.py)":
