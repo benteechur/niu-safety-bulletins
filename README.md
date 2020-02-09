@@ -55,8 +55,8 @@ After deleting the extra columns, there are only 4 attributes which are "Inciden
   * `Date Occurred`: the date when the incident happened
   * `Time_24` (new): extracted from the `Details` column. It indicates the approximate time of the incident. (Note: some records don't have this value because it was originally unspecified in `Details`)
   * `Dayofweek` (new): generated based on `Date Occurred`
-  * `Location`: spefifies the location where the incident happened. (Note: some of the records don't have this value because of the type of notification. For example, if the notification is about crime then it's supposed to have location, but if it's just a community awareness notification then it might not have location)
-  * `Location_map` (new): generated based on `Location`. This was used for ploting the location on maps, either in Google Maps or Tableau
+  * `Location`: specifies the location where the incident happened. (Note: some of the records don't have this value because of the type of notification. For example, if the notification is about crime then it's supposed to have location, but if it's just a community awareness notification then it might not have location)
+  * `Location_map` (new): generated based on `Location`. This was used for importing data into Google My Maps
   * `Latitude` (new): generated based on `Location_map` using the Google Maps API. It will be used in plotting location in Tableau
   * `Longitude` (new): generated based on `Location_map` using the Google Maps API. It will be used in plotting location in Tableau
   * `Details`: includes more detailed information about the incidents
