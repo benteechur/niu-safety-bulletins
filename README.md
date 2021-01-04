@@ -1,4 +1,4 @@
-# Criminal Trend Analysis based on NIU Safety Bulletins
+# Crime Trend Analysis based on NIU Safety Bulletins
 Campus Safety is always an important issue for both students and faculty. Northern Illinois University Police and Public Safety have been posting notifications which include crime and safety alerts for DeKalb since 2017. This data was scraped, cleaned, and analyzed in this repository, aiming to uncover interesting facts and hidden patterns.
 
 ## Quick Links
